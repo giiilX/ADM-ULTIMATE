@@ -1102,7 +1102,7 @@ if [ -d '/usr/local/ddos' ]; then
 		rm -f /etc/cron.d/ddos.cron
 	fi
 	sleep 4s
-	echo -e "\033[1;31m ANTI_DDOS DESINSTALADO CON ÉXITO\033[1;37m"
+	echo -e "\033[1;31m ANTI_DDOS DESINSTALADO CON EXITO\033[1;37m"
 	echo -e "$barra"
 	return 1
 else
