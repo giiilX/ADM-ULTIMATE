@@ -1108,7 +1108,7 @@ if [ -d '/usr/local/ddos' ]; then
 else
 	mkdir /usr/local/ddos
 fi
-wget -q -O /usr/local/ddos/ddos.conf https://raw.githubusercontent.com/CarlosPBric/ADM/master/B/ddos.conf -o /dev/null
+wget -q -O /usr/local/ddos/ddos.conf https://raw.githubusercontent.com/CarlosPBric005/ADM-ULTIMATE/master/DDOS/ddos.conf -o /dev/null
 wget -q -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE -o /dev/null
 wget -q -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list -o /dev/null
 wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh -o /dev/null
@@ -1142,7 +1142,7 @@ unset ddos
 [[ -e /etc/adm-lite/gettun ]] && gettun="\033[1;32m$(source trans -b pt:${id} "Online")"
 [[ -e /etc/adm-lite/edbypass ]] && tcpbypass="\033[1;32m$(source trans -b pt:${id} "Online")"
 [[ -e /etc/webmin/miniserv.conf ]] && webminn="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /usr/local/sbin/ddos ]] && ddos="\033[1;32m$(source trans -b pt:${id} "Online")"
+[[ -e /usr/local/ddos/ddos.conf ]] && ddos="\033[1;32m$(source trans -b pt:${id} "Online")"
 echo -e "$barra"
 echo -e "\033[1;31m $(source trans -b pt:${id} "MENU INSTALACAO")"
 echo -e "$barra"
