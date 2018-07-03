@@ -359,7 +359,7 @@ if [[ "$EUID" -ne 0 ]]; then
 	echo " Sorry, you need to run this as root"
 	echo -e "$barra"
 	read -p " Enter"
-	source menu
+	exit
 fi
 
 if [[ ! -e /dev/net/tun ]]; then
@@ -367,7 +367,7 @@ if [[ ! -e /dev/net/tun ]]; then
 	echo " The TUN device is not available"
 	echo -e "$barra"
 	read -p " Enter" 
-	source menu
+	exit
 fi
 if [[ -e /etc/debian_version ]]; then
 OS="debian"
