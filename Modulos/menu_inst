@@ -1,11 +1,8 @@
 #!/bin/bash
 [[ $1 != "" ]] && id="$1" || id="es"
-cor[0]="\033[1;37m"
-cor[1]="\033[1;34m"
-cor[2]="\033[1;31m"
-cor[3]="\033[1;33m"
-cor[4]="\033[1;32m'"
 barra="\033[1;34m=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=\033[1;37m"
+_cores="./cores"
+
 
 #LISTA PORTAS
 mportas () {
@@ -919,11 +916,11 @@ IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,
 [[ -e /etc/adm-lite/sockdirect ]] && _sockdirect="\033[1;32mOn" || _sockdirect="\033[1;31mOff"
 [[ -e /etc/adm-lite/sockopen ]] && _sockopen="\033[1;32mOn" || _sockopen="\033[1;31mOff"
 echo -e "${barra}"
-echo -e "\033[1;31m [ 1 ] \033[1;33m$(source trans -b pt:${id} "Socks Python SIMPLE") ${_sockpub}"
-echo -e "\033[1;31m [ 2 ] \033[1;33m$(source trans -b pt:${id} "Socks Python SEGURO") ${_sockpriv}"
-echo -e "\033[1;31m [ 3 ] \033[1;33m$(source trans -b pt:${id} "Socks Python DIRECTO") ${_sockdirect}"
-echo -e "\033[1;31m [ 4 ] \033[1;33m$(source trans -b pt:${id} "Socks Python OPENVPN") ${_sockopen}"
-echo -e "\033[1;31m [ 5 ] \033[1;33m$(source trans -b es:${id} "Detener Socks Python")\n${barra}"
+echo -e "${cor[2]} [ 1 ] ${cor[3]}Socks Python SIMPLE ${_sockpub}"
+echo -e "${cor[2]} [ 2 ] ${cor[3]}Socks Python SEGURO ${_sockpriv}"
+echo -e "${cor[2]} [ 3 ] ${cor[3]}Socks Python DIRECTO ${_sockdirect}"
+echo -e "${cor[2]} [ 4 ] ${cor[3]}Socks Python OPENVPN ${_sockopen}"
+echo -e "${cor[2]} [ 5 ] ${cor[3]}Detener Socks Python \n${barra}"
 while true; do
 read -p " Option: " portproxy
     case $portproxy in
@@ -1102,7 +1099,8 @@ if [ -d '/usr/local/ddos' ]; then
 		rm -f /etc/cron.d/ddos.cron
 	fi
 	sleep 4s
-	echo -e "\033[1;31m ANTI_DDOS DESINSTALADO CON EXITO\033[1;37m"
+	echo -e "$barra"
+	echo -e "\033[1;31m ANTIDDOS DESINSTALADO CON EXITO\033[1;37m"
 	echo -e "$barra"
 	return 1
 else
@@ -1116,10 +1114,47 @@ chmod 0755 /usr/local/ddos/ddos.sh
 cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 /usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
 sleep 2s
-echo -e "\033[1;32m ANTI_DDOS INSTALADO CON EXITO.\033[1;37m"
+echo -e "$barra"
+echo -e "\033[1;32m ANTIDDOS INSTALADO CON EXITO.\033[1;37m"
 echo -e "$barra"
 }
 
+#FUNCOES
+funcao_addcores () {
+if [ "$1" = "0" ]; then
+cor[$2]="\033[0m"
+elif [ "$1" = "1" ]; then
+cor[$2]="\033[1;31m"
+elif [ "$1" = "2" ]; then
+cor[$2]="\033[1;32m"
+elif [ "$1" = "3" ]; then
+cor[$2]="\033[1;33m"
+elif [ "$1" = "4" ]; then
+cor[$2]="\033[1;34m"
+elif [ "$1" = "5" ]; then
+cor[$2]="\033[1;35m"
+elif [ "$1" = "6" ]; then
+cor[$2]="\033[1;36m"
+elif [ "$1" = "7" ]; then
+cor[$2]="\033[1;37m"
+fi
+}
+
+[[ -e $_cores ]] && {
+_cont="0"
+while read _cor; do
+funcao_addcores ${_cor} ${_cont}
+_cont=$(($_cont + 1))
+done < $_cores
+} || {
+cor[0]="\033[0m"
+cor[1]="\033[1;34m"
+cor[2]="\033[1;32m"
+cor[3]="\033[1;37m"
+cor[4]="\033[1;36m"
+cor[5]="\033[1;33m"
+cor[6]="\033[1;35m"
+}
 unset squid
 unset dropbear
 unset openvpn
@@ -1146,17 +1181,17 @@ unset ddos
 echo -e "$barra"
 echo -e "\033[1;31m $(source trans -b pt:${id} "MENU INSTALACAO")"
 echo -e "$barra"
-echo -e "${cor[2]} |1| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") SQUID $squid"
-echo -e "${cor[2]} |2| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") DROPBEAR $dropbear"
-echo -e "${cor[2]} |3| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") OPENVPN $openvpn"
-echo -e "${cor[2]} |4| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") SSL $stunel"
-echo -e "${cor[2]} |5| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") SHADOW SOCKS $shadow"
-echo -e "${cor[2]} |6| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") PROXY SOCKS $socks"
-echo -e "${cor[2]} |7| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") PROXY GETTUNEL $gettun"
-echo -e "${cor[2]} |8| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") TCP OVER BYPASS $tcpbypass"
-echo -e "${cor[2]} |9| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR ") TELEGRAN MANAGER BOT $telegran"
-echo -e "${cor[2]} |10| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR ") WEBMIN $webminn"
-echo -e "${cor[2]} |11| > ${cor[3]}$(source trans -b pt:${id} "CONFIGURAR") Anti-DDOS $ddos"
+echo -e "${cor[2]} [1] > ${cor[3]}SQUID $squid"
+echo -e "${cor[2]} [2] > ${cor[3]}DROPBEAR $dropbear"
+echo -e "${cor[2]} [3] > ${cor[3]}OPENVPN $openvpn"
+echo -e "${cor[2]} [4] > ${cor[3]}SSL $stunel"
+echo -e "${cor[2]} [5] > ${cor[3]}SHADOW SOCKS $shadow"
+echo -e "${cor[2]} [6] > ${cor[3]}PROXY SOCKS $socks"
+echo -e "${cor[2]} [7] > ${cor[3]}PROXY GETTUNEL $gettun"
+echo -e "${cor[2]} [8] > ${cor[3]}TCP OVER BYPASS $tcpbypass"
+echo -e "${cor[2]} [9] > ${cor[3]}TELEGRAN MANAGER BOT $telegran"
+echo -e "${cor[2]} [10] > ${cor[3]}WEBMIN $webminn"
+echo -e "${cor[2]} [11] > ${cor[3]}Anti-DDOS $ddos"
 echo -e "$barra"
 echo -ne "\033[1;37m $(source trans -b pt:${id} "Selecione Uma Opcao"): "
 read optons
