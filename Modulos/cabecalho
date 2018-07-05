@@ -463,7 +463,7 @@ chmod 777 ./*
 echo -e "${cor[3]} "¿Realmente desea actualizar su ADM-Ultimate?""
 read -p " [S/N]: " -e -i n sshsn
 [[ "$sshsn" = @(s|S|y|Y) ]] && {
-rm $_dr > /dev/null
+rm /etc/adm-lite/idioma > /dev/null
 ./updateadm
 }
 return 0
