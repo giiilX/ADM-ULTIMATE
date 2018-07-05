@@ -2,7 +2,8 @@
 [[ $1 != "" ]] && id="$1" || id="es"
 barra="\033[1;34m=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=\033[1;37m"
 _cores="./cores"
-
+_dr="./idioma"
+[[ "$(echo ${txt[0]})" = "" ]] && source idioma_geral
 
 #LISTA PORTAS
 mportas () {
@@ -1179,7 +1180,7 @@ unset ddos
 [[ -e /etc/webmin/miniserv.conf ]] && webminn="\033[1;32m$(source trans -b pt:${id} "Online")"
 [[ -e /usr/local/ddos/ddos.conf ]] && ddos="\033[1;32m$(source trans -b pt:${id} "Online")"
 echo -e "$barra"
-echo -e "\033[1;31m $(source trans -b pt:${id} "MENU INSTALACAO")"
+echo -e "${cor[5]} ${txt[335]}"
 echo -e "$barra"
 echo -e "${cor[2]} [1] > ${cor[3]}SQUID $squid"
 echo -e "${cor[2]} [2] > ${cor[3]}DROPBEAR $dropbear"

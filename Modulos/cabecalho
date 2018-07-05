@@ -312,8 +312,7 @@ idioma[6]="es Spanish"
 i="1"
 echo -e "${cor[1]} ===================================================================== ${cor[0]}"
 echo -e "${cor[5]} ${txt[77]} ${txt[78]}
- ${txt[79]}
- ${txt[80]}"
+ ${txt[79]}"
 echo -e "${cor[1]} ===================================================================== ${cor[3]}"
 while true; do
 [[ "${idioma[$i]}" = "" ]] && break
@@ -342,8 +341,8 @@ else
  }
 fi
 [[ "$id" = "" ]] && {
- echo -e " Error, Language not Selected!"
- sleep 2s
+ echo -e " Error!"
+ sleep 1s
  source menu
  exit 0
  }
@@ -378,7 +377,6 @@ apt-get install gawk -y > /dev/null 2>&1
 rm $_dr && rm $_idioma
 cd /etc/adm-lite
 wget https://raw.githubusercontent.com/CarlosPBric005/IDIOMA_VPS/master/$1/idioma
-wget https://raw.githubusercontent.com/CarlosPBric005/IDIOMA_VPS/master/$1/idioma_geral
 unset txt
 touch $HOME/fim
 exit 0

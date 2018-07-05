@@ -164,7 +164,6 @@ pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 echo -e "${cor[1]} =================================== ${cor[0]}"
 if [ "$pid_badvpn" = "" ]; then
     echo -e "${cor[4]} ${txt[118]}\n ${txt[119]}\n ${txt[120]}\n ${txt[121]}"
-    echo -e "${cor[5]} ${txt[122]}"
     echo -e "${cor[1]} =================================== ${cor[0]}"
     if [[ ! -e /bin/badvpn-udpgw ]]; then
     cd $HOME
@@ -194,19 +193,12 @@ echo -e "${cor[4]} ${txt[126]}"
 echo -e "${cor[4]} ${txt[127]}"
 echo -e "${cor[4]} ${txt[128]}"
 echo -e "${cor[1]} =================================== ${cor[0]}"
-echo -e "${cor[5]} ${txt[129]}"
 sleep 1s
 if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
 #INSTALA
 echo -e "${cor[5]} ${txt[130]}"
-echo -e "${cor[5]} ${txt[131]}"
-echo -e "${cor[5]} ${txt[132]}"
-echo -e "${cor[5]} ${txt[133]}"
-echo -e "${cor[5]} ${txt[134]}"
-echo -e "${cor[5]} ${txt[135]}"
 echo -e "${cor[1]} =================================== ${cor[0]}"
 read -p " ${txt[136]} [s/n]: " -e -i s resp_osta
-echo -e "\033[1;37m"
 if [[ "$resp_osta" = 's' ]]; then
 unset resp_osta
 echo "#ADM" >> /etc/sysctl.conf
