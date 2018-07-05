@@ -371,7 +371,6 @@ exit 0
 }
 
 traduzir () {
-[[ "$1" = "es" ]] && rm $_dr > /dev/null && touch $HOME/fim && exit
 apt-get install gawk -y > /dev/null 2>&1
 [[ -e $_tmp4 ]] && rm $_tmp4
 rm $_dr && rm $_idioma
