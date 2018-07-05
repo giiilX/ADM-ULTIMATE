@@ -310,10 +310,10 @@ idioma[4]="it Italian"
 idioma[5]="pt Portuguese"
 idioma[6]="es Spanish"
 i="1"
-echo -e "${cor[1]} ===================================================================== ${cor[0]}"
+echo -e "${cor[1]} =================================== ${cor[0]}"
 echo -e "${cor[5]} ${txt[77]} ${txt[78]}
  ${txt[79]}"
-echo -e "${cor[1]} ===================================================================== ${cor[3]}"
+echo -e "${cor[1]} =================================== ${cor[3]}"
 while true; do
 [[ "${idioma[$i]}" = "" ]] && break
 a=$(echo ${idioma[$i]} | awk '{print $2}')
@@ -329,7 +329,7 @@ texto3=$(printf '%-20s' "[ $i ]-$a")
 i=$(($i+1))
 echo -e "$texto1 $texto2 $texto3"
 done
-echo -e "${cor[1]} ===================================================================== ${cor[0]}"
+echo -e "${cor[1]} =================================== ${cor[0]}"
 echo -e " ${txt[82]}"
 read -p " => " idiom
 number_var $idiom > /dev/null 2>&1
@@ -364,7 +364,7 @@ echo ""
 fi
 done
 echo ""
-echo -e "${cor[1]} ===================================================================== ${cor[0]}"
+echo -e "${cor[1]} =================================== ${cor[0]}"
 echo -e "\033[0m"
 unset idioma
 exit 0
@@ -463,6 +463,7 @@ chmod 777 ./*
 echo -e "${cor[3]} "¿Realmente desea actualizar su ADM-Ultimate?""
 read -p " [S/N]: " -e -i n sshsn
 [[ "$sshsn" = @(s|S|y|Y) ]] && {
+rm $_dr > /dev/null
 ./updateadm
 }
 return 0
