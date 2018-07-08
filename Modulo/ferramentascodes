@@ -842,103 +842,6 @@ chmod +x ./paysnd.sh
 }
 
 function_16 () {
-tmp_arq="/tmp/arq-tmp"
-if [ -d "/etc/squid" ]; then
-pwd="/etc/squid/passwd"
-config_="/etc/squid/squid.conf"
-service_="squid"
-squid_="0"
-elif [ -d "/etc/squid3" ]; then
-pwd="/etc/squid3/passwd"
-config_="/etc/squid3/squid.conf"
-service_="squid3"
-squid_="1"
-fi
-[[ ! -e $config_ ]] && 
-echo -e "${cor[1]} =================================== ${cor[0]}" && 
-echo -e " \033[1;36m${txt[326]}" && 
-echo -e "${cor[1]} =================================== ${cor[0]}" && 
-return 0
-if [ -e $pwd ]; then 
-echo -e "${cor[3]} "${txt[330]}""
-read -p " [S/N]: " -e -i n sshsn
-[[ "$sshsn" = @(s|S|y|Y) ]] && {
-echo -e "${cor[1]} =================================== ${cor[0]}"
-echo -e " \033[1;36mUninstalling DEPENDENCE:"
-fun_bar 'apt-get remove apache2-utils'
-echo -e "${cor[1]} =================================== ${cor[0]}"
-cat $config_ | grep -v '#Password' > $tmp_arq
-mv -f $tmp_arq $config_ 
-cat $config_ | grep -v '^auth_param.*passwd*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-cat $config_ | grep -v '^auth_param.*proxy*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-cat $config_ | grep -v '^acl.*REQUIRED*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-cat $config_ | grep -v '^http_access.*authenticated*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-cat $config_ | grep -v '^http_access.*all*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-echo -e "
-http_access allow all" >> "$config_"
-rm -f $pwd
-service $service_ restart  > /dev/null 2>&1 &
-echo -e " \033[1;31m${txt[327]}"
-echo -e "${cor[1]} =================================== ${cor[0]}"
-} 
-else
-echo -e "${cor[3]} "${txt[329]}""
-read -p " [S/N]: " -e -i n sshsn
-[[ "$sshsn" = @(s|S|y|Y) ]] && {
-echo -e "${cor[1]} =================================== ${cor[0]}"
-echo -e " \033[1;36mInstalling DEPENDENCE:"
-fun_bar 'apt-get install apache2-utils'
-echo -e "${cor[1]} =================================== ${cor[3]}"
-read -e -p " Your desired username: " usrn
-[[ $usrn = "" ]] && 
-echo -e "${cor[1]} =================================== ${cor[0]}" && 
-echo -e " \033[1;31m${txt[328]}" && 
-echo -e "${cor[1]} =================================== ${cor[0]}" && 
-return 0
-htpasswd -c $pwd $usrn
-succes_=$(grep -c "$usrn" $pwd)
-if [ "$succes_" = "0" ]; then
-rm -f $pwd
-echo -e "${cor[1]} =================================== ${cor[0]}"
-echo -e " \033[1;31m${txt[324]}"
-echo -e "${cor[1]} =================================== ${cor[0]}"
-return 0
-elif [[ "$succes_" = "1" ]]; then
-cat $config_ | grep -v '^http_access.*all*$' > $tmp_arq
-mv -f $tmp_arq $config_ 
-if [ "$squid_" = "0" ]; then
-echo -e "#Password
-auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
-auth_param basic realm proxy
-acl authenticated proxy_auth REQUIRED
-http_access allow authenticated
-http_access deny all" >> "$config_"
-service squid restart  > /dev/null 2>&1 &
-update-rc.d squid defaults > /dev/null 2>&1 &
-elif [ "$squid_" = "1" ]; then
-echo -e "#Password
-auth_param basic program /usr/lib/squid3/basic_ncsa_auth /etc/squid3/passwd
-auth_param basic realm proxy
-acl authenticated proxy_auth REQUIRED
-http_access allow authenticated
-http_access deny all" >> "$config_"
-service squid3 restart > /dev/null 2>&1 &
-update-rc.d squid3 defaults > /dev/null 2>&1 &
-fi
-echo -e "${cor[1]} =================================== ${cor[0]}"
-echo -e " \033[1;32m${txt[325]}"
-echo -e "${cor[1]} =================================== ${cor[0]}"
-fi
-}
-fi
-}
-
-function_17 () {
 echo -e "${cor[3]} "${txt[333]}""
 read -p " [S/N]: " -e -i n rebt
 [[ "$rebt" = @(s|S|y|Y) ]] && {
@@ -968,7 +871,6 @@ sudo reboot
 [[ "$1" = "14" ]] && paybrute
 [[ "$1" = "15" ]] && block_torrent
 [[ "$1" = "16" ]] && function_16
-[[ "$1" = "17" ]] && function_17
 ####_Eliminar_Tmps_####
 [[ -e $_tmp ]] && rm $_tmp
 [[ -e $_tmp2 ]] && rm $_tmp2

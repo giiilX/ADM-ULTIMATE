@@ -151,7 +151,7 @@ http_access allow url3
 http_access allow url4
 http_access allow accept
 http_access allow HEAD
-http_access allow all
+http_access deny all
 
 # Request Headers Forcing
 
@@ -214,7 +214,7 @@ http_access allow url1
 http_access allow url2
 http_access allow url3
 http_access allow url4
-http_access allow all
+http_access deny all
 
 #portas" > $var_squid
 for pts in $(echo -e $PORT); do
