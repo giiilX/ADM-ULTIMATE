@@ -1,6 +1,6 @@
 #!/bin/bash
 [[ $1 != "" ]] && id="$1" || id="es"
-barra="\033[1;34m=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=\033[1;37m"
+barra="${cor[1]} =================================== ${cor[0]}"
 _cores="./cores"
 _dr="./idioma"
 [[ "$(echo ${txt[0]})" = "" ]] && source idioma_geral
@@ -1204,7 +1204,7 @@ echo -e "$barra"
 echo -e "${cor[2]} [1] > ${cor[3]}SQUID $squid"
 echo -e "${cor[2]} [2] > ${cor[3]}DROPBEAR $dropbear"
 echo -e "${cor[2]} [3] > ${cor[3]}OPENVPN $openvpn"
-echo -e "${cor[2]} [4] > ${cor[3]}SSL $stunel"
+echo -e "${cor[2]} [4] > ${cor[3]}SSL TUNNEL $stunel"
 echo -e "${cor[2]} [5] > ${cor[3]}SHADOW SOCKS $shadow"
 echo -e "${cor[2]} [6] > ${cor[3]}PROXY SOCKS $socks"
 echo -e "${cor[2]} [7] > ${cor[3]}PROXY GETTUNEL $gettun"
