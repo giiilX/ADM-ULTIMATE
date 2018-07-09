@@ -520,7 +520,9 @@ echo -e "${cor[5]} ${txt[218]} $payload:"
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
 cat $payload | awk -F "/" '{print $1,$2,$3,$4}'
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
-read -p " ${txt[219]} ${txt[220]}: " hos
+echo -e " ${txt[219]}"
+echo -e " ${txt[220]}" 
+read -p " Host: " hos
 if [[ $hos != \.* ]]; then
 echo -e "${cor[5]} ${txt[220]}"
 return

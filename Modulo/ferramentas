@@ -1,8 +1,8 @@
 #!/bin/bash
 source ferramentas-txt
 echo -ne "${cor[6]}"
-read -p " ${txt[9]} " _seleca
-case $_seleca in
+read -p " ${txt[9]} " _selecao
+case $_selecao in
 0)
 source menu
 exit
